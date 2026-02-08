@@ -30,7 +30,17 @@ const corsOptions = {
             return callback(null, true);
         }
 
-        // Allow listed origins
+        // Allow all Vercel domains (including preview deployments)
+        if (/\.vercel\.app$/.test(origin)) {
+            return callback(null, true);
+        }
+
+        // Allow all Render domains
+        if (/\.onrender\.com$/.test(origin)) {
+            return callback(null, true);
+        }
+
+        // Allow listed origins (from FRONTEND_URL env var)
         if (allowedOrigins.includes(origin)) {
             return callback(null, true);
         }
